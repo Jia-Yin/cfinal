@@ -10,6 +10,10 @@ typedef struct {
 } Student;
 
 void printStudents(Student students[], int numStudents);
+void randomInitStudents(Student students[], int numStudents);
+void sortStudentsbySID(Student students[], int numStudents);
+void sortStudentsbyName(Student students[], int numStudents);
+void sortStudentsbyGrade(Student students[], int numStudents);
 
 // Your code goes here
 
