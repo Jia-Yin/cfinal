@@ -1,3 +1,9 @@
+# Add by Chin
+.vscode
+.vscode/tasks.json
+main
+*.exe
+
 # Prerequisites
 *.d
 
@@ -50,3 +56,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
