@@ -12,6 +12,25 @@ void printStudents(Student students[], int numStudents) {
     }
 }
 
+int readSRecordsFromCSV(const char* filename, SRecord srecords[], int maxNumSRecords) {
+    // 從CSV文件中讀取學生成績信息
+    FILE* file = fopen(filename, "r"); // r=read, w=write, a=append
+    if (file == NULL) {
+        printf("Failed to open file %s\n", filename);
+        return 0;
+    }
+    // skip header line
+    char line[1024];
+    fgets(line, 1024, file);
+    int numSRecords = 0;
+    while (fgets(line, 1024, file) && numSRecords < maxNumSRecords) {
+        sscanf(line, "%[^,],%[^,],%d,%[^,],%lf,%lf,%lf,%lf,%lf", srecords[numSRecords].student.department, srecords[numSRecords].student.sid, &srecords[numSRecords].student.grade, srecords[numSRecords].student.name, &srecords[numSRecords].hw, &srecords[numSRecords].quiz, &srecords[numSRecords].midterm, &srecords[numSRecords].final, &srecords[numSRecords].other);
+        numSRecords++;
+    }
+    fclose(file);
+    return numSRecords;
+}
+
 void printSRecords(SRecord srecords[], int numSRecords) {
     // 打印學生成績信息
     printf("%-15s %-12s %8s    %-10s %5s %5s %5s %5s %5s %5s\n", "Name", "Department", "Grade", "SID", "HW", "Quiz", "Midterm", "Final", "Other", "Total");

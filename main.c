@@ -1,18 +1,15 @@
 #include <stdio.h>
 #include "myhead.h"
 
-#define MAX_STUDENT 10
+#define MAX_STUDENT 100
 
 int main() {
     // 創建並初始化學生實例
-    Student students[MAX_STUDENT];
-    randomInitStudents(students, MAX_STUDENT);
+    SRecord srecords[MAX_STUDENT];
+    int numSRecords = readSRecordsFromCSV("records.csv", srecords, MAX_STUDENT);
 
-    sortStudents(students, MAX_STUDENT, "sid");
-    printStudents(students, MAX_STUDENT);
-
-    sortStudents(students, MAX_STUDENT, "name");
-    printStudents(students, MAX_STUDENT);
+    // 打印學生成績信息
+    printSRecords(srecords, numSRecords);
 
     return 0;
 }

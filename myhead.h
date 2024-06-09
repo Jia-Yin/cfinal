@@ -19,6 +19,8 @@ typedef struct {
 
 void printStudents(Student students[], int numStudents);
 void printSRecords(SRecord srecords[], int numSRecords);
+int readSRecordsFromCSV(const char* filename, SRecord srecords[], int maxNumSRecords);
+
 
 
 void randomInitStudents(Student students[], int numStudents);
