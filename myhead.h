@@ -11,7 +11,16 @@ typedef struct {
     char sid[50];
 } Student;
 
+typedef struct {
+    Student student;
+    // 作業,平時測驗,期中測驗,期末報告,其他(出席及平時表現),原始成績
+    double hw, quiz, midterm, final, other, total;
+} SRecord;
+
 void printStudents(Student students[], int numStudents);
+void printSRecords(SRecord srecords[], int numSRecords);
+
+
 void randomInitStudents(Student students[], int numStudents);
 // void sortStudentsBySID(Student* students, int numStudents);
 // void sortStudentsByName(Student* students, int numStudents);
