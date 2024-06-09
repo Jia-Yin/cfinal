@@ -3,32 +3,26 @@
 #include "myhead.h"
 
 // Comparison function for qsort
-int compareStudentSID(const void* a, const void* b) {
+int compareStudents(const void* a, const void* b) {
     Student* studentA = (Student*)a;
     Student* studentB = (Student*)b;
     return strcmp(studentA->sid, studentB->sid);
 }
 
-int compareStudentName(const void* a, const void* b) {
+// Comparison function by name
+int compareStudentsByName(const void* a, const void* b) {
     Student* studentA = (Student*)a;
     Student* studentB = (Student*)b;
     return strcmp(studentA->name, studentB->name);
 }
 
-int compareStudentGrade(const void* a, const void* b) {
-    Student* studentA = (Student*)a;
-    Student* studentB = (Student*)b;
-    return studentA->grade - studentB->grade;
-}
-
-void sortStudentsbySID(Student students[], int numStudents) {
-    qsort(students, numStudents, sizeof(Student), compareStudentSID);
-}
-
-void sortStudentsbyName(Student students[], int numStudents) {
-    qsort(students, numStudents, sizeof(Student), compareStudentName);
-}
-
-void sortStudentsbyGrade(Student students[], int numStudents) {
-    qsort(students, numStudents, sizeof(Student), compareStudentGrade);
+void sortStudents(Student* students, int numStudents, const char* sortBy) {
+    if (strcmp(sortBy, "sid") == 0) {
+        qsort(students, numStudents, sizeof(Student), compareStudents);
+    } else if (strcmp(sortBy, "name") == 0) {
+        qsort(students, numStudents, sizeof(Student), compareStudentsByName);
+    } else {
+        // Handle invalid sortBy parameter
+        // You can throw an error, print a message, or take any other appropriate action
+    }
 }

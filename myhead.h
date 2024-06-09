@@ -1,6 +1,8 @@
 #ifndef MYHEAD_H
 #define MYHEAD_H
 
+#include <stdio.h>
+
 // 定義學生結構
 typedef struct {
     char name[50];
@@ -11,10 +13,8 @@ typedef struct {
 
 void printStudents(Student students[], int numStudents);
 void randomInitStudents(Student students[], int numStudents);
-void sortStudentsbySID(Student students[], int numStudents);
-void sortStudentsbyName(Student students[], int numStudents);
-void sortStudentsbyGrade(Student students[], int numStudents);
-
-// Your code goes here
+// void sortStudentsBySID(Student* students, int numStudents);
+// void sortStudentsByName(Student* students, int numStudents);
+void sortStudents(Student* students, int numStudents, const char* sortBy);
 
 #endif // MYHEAD_H
