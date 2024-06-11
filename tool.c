@@ -25,6 +25,9 @@ int readSRecordsFromCSV(const char* filename, SRecord srecords[], int maxNumSRec
     int numSRecords = 0;
     while (fgets(line, 1024, file) && numSRecords < maxNumSRecords) {
         sscanf(line, "%[^,],%[^,],%d,%[^,],%lf,%lf,%lf,%lf,%lf", srecords[numSRecords].student.department, srecords[numSRecords].student.sid, &srecords[numSRecords].student.grade, srecords[numSRecords].student.name, &srecords[numSRecords].hw, &srecords[numSRecords].quiz, &srecords[numSRecords].midterm, &srecords[numSRecords].final, &srecords[numSRecords].other);
+
+        srecords[numSRecords].total = srecords[numSRecords].hw * HW_WEIGHT + srecords[numSRecords].quiz * QUIZ_WEIGHT + srecords[numSRecords].midterm * MIDTERM_WEIGHT + srecords[numSRecords].final * FINAL_WEIGHT + srecords[numSRecords].other * OTHER_WEIGHT;
+
         numSRecords++;
     }
     fclose(file);
