@@ -3,18 +3,52 @@
 
 #define MAX_STUDENT 100
 
+void displayMenu() {
+    printf("\nMenu:\n");
+    printf("1. Read student records from CSV\n");
+    printf("2. Print student records\n");
+    printf("3. Sort by total and print student records\n");
+    printf("4. Exit\n");
+    printf("Enter your choice: ");
+}
+
 int main() {
-    // 創建並初始化學生實例
     SRecord srecords[MAX_STUDENT];
-    int numSRecords = readSRecordsFromCSV("records.csv", srecords, MAX_STUDENT);
+    int numSRecords = 0;
+    int choice;
 
-    // 打印學生成績信息
-    printSRecords(srecords, numSRecords);
+    do {
+        displayMenu();
+        scanf("%d", &choice);
 
-    // 按照學生總分排序
-    sortSRecords(srecords, numSRecords, "total");
-    printf("\n\nAfter sorting by total:\n");
-    printSRecords(srecords, numSRecords);
+        switch (choice) {
+            case 1:
+                numSRecords = readSRecordsFromCSV("records.csv", srecords, MAX_STUDENT);
+                printf("%d records read.\n", numSRecords);
+                break;
+            case 2:
+                if (numSRecords > 0) {
+                    printSRecords(srecords, numSRecords);
+                } else {
+                    printf("No records to display. Please read records first.\n");
+                }
+                break;
+            case 3:
+                if (numSRecords > 0) {
+                    sortSRecords(srecords, numSRecords, "total");
+                    printf("\nAfter sorting by total:\n");
+                    printSRecords(srecords, numSRecords);
+                } else {
+                    printf("No records to sort. Please read records first.\n");
+                }
+                break;
+            case 4:
+                printf("Exiting program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 4.\n");
+        }
+    } while (choice != 4);
 
     return 0;
 }
