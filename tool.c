@@ -34,6 +34,12 @@ int readSRecordsFromCSV(const char* filename, SRecord srecords[], int maxNumSRec
     return numSRecords;
 }
 
+void printSRecord(SRecord srecord) {
+    // 打印單個學生成績信息
+    printf("%-15s %-12s %8d    %-10s %5.1f %5.1f %5.1f %5.1f %5.1f %5.1f\n", srecord.student.name, srecord.student.department, srecord.student.grade, srecord.student.sid, srecord.hw, srecord.quiz, srecord.midterm, srecord.final, srecord.other, srecord.total);
+}
+
+
 void printSRecords(SRecord srecords[], int numSRecords) {
     // 打印學生成績信息
     printf("%-15s %-12s %8s    %-10s %5s %5s %5s %5s %5s %5s\n", "Name", "Department", "Grade", "SID", "HW", "Quiz", "Midterm", "Final", "Other", "Total");
