@@ -40,7 +40,7 @@ int main() {
 
         switch (choice) {
             case 1:
-                numSRecords = readSRecordsFromCSV("records.csv", srecords, MAX_STUDENT);
+                numSRecords = readSRecordsFromCSV("recordsB5.csv", srecords, MAX_STUDENT);
                 printf("Number of records read: %d\n", numSRecords);
                 break;
             case 2:

@@ -36,7 +36,9 @@ int readSRecordsFromCSV(const char* filename, SRecord srecords[], int maxNumSRec
 
 void printSRecords(SRecord srecords[], int numSRecords) {
     // 打印學生成績信息
+    setColor(GREEN);
     printf("%-15s %-12s %8s    %-10s %5s %5s %5s %5s %5s %5s\n", "Name", "Department", "Grade", "SID", "HW", "Quiz", "Midterm", "Final", "Other", "Total");
+    setColor(WHITE);
     printf("-----------------------------------------------------------------------------\n");
     for (int i = 0; i < numSRecords; i++) {
         printf("%-15s %-12s %8d    %-10s %5.1f %5.1f %5.1f %5.1f %5.1f %5.1f\n", srecords[i].student.name, srecords[i].student.department, srecords[i].student.grade, srecords[i].student.sid, srecords[i].hw, srecords[i].quiz, srecords[i].midterm, srecords[i].final, srecords[i].other, srecords[i].total);
