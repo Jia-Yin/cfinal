@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "myhead.h"
 
 #define MAX_STUDENT 100
@@ -26,10 +27,12 @@ void printSRecord(SRecord record) {
            record.total);
 }
 
+
 void searchSRecords(SRecord srecords[], int numSRecords) {
     char searchQuery[50];
     printf("Enter student name or SID to search: ");
     scanf("%s", searchQuery); // For simplicity, assuming no spaces in names or SIDs
+    printf("Searching for \'%s\'...\n", searchQuery);
 
     int found = 0;
     for (int i = 0; i < numSRecords; i++) {
