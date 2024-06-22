@@ -2,6 +2,7 @@
 #define MYHEAD_H
 
 #include <stdio.h>
+#include "rlutil.h"
 
 // 定義學生結構
 typedef struct {

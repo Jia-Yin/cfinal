@@ -5,7 +5,11 @@
 #define MAX_STUDENT 100
 
 void displayMenu() {
+    saveDefaultColor();
+    setColor(YELLOW);
+    setBackgroundColor(BLUE);
     printf("\nMenu:\n");
+    resetColor();
     printf("1. Read and display student records\n");
     printf("2. Sort records by total and display\n");
     printf("3. Search student records by name or SID\n");
@@ -51,6 +55,7 @@ void searchSRecords(SRecord srecords[], int numSRecords) {
         printf("No records found for '%s'.\n", searchQuery);
     }
 }
+
 int main() {
     SRecord srecords[MAX_STUDENT];
     int numSRecords = 0;
