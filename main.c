@@ -4,44 +4,57 @@
 
 #define MAX_STUDENT 100
 
+void displayMenu() {
+    saveDefaultColor();
+    setColor(YELLOW);
+    setBackgroundColor(BLUE);
+    printf("\nMenu:\n");
+    resetColor();
+    printf("1. Read and display student records\n");
+    printf("2. Sort records by total and display\n");
+    printf("3. Search student records by name or SID\n");
+    printf("4. Exit\n");
+    printf("Enter your choice: ");
+}
+
+void printSRecord(SRecord record) {
+    printf("%-15s %-12s %8d    %-10s %5.1f %5.1f %5.1f %5.1f %5.1f %5.1f\n",
+           record.student.name,
+           record.student.department,
+           record.student.grade,
+           record.student.sid,
+           record.hw,
+           record.quiz,
+           record.midterm,
+           record.final,
+           record.other,
+           record.total);
+}
+
+
 void searchSRecords(SRecord srecords[], int numSRecords) {
-    char searchInput[50];
-    printf("Enter name or SID to search: ");
-    scanf(" %[^\n]s", searchInput);
-    // fgets(searchInput, sizeof(searchInput), stdin);
-    // searchInput[strcspn(searchInput, "\n")] = '\0'; // Remove the trailing newline character
-    // Strip the final '\n' character from searchInput
-    // if (searchInput[strlen(searchInput) - 1] == '\n') {
-    //     searchInput[strlen(searchInput) - 1] = '\0';
-    // }
-    printf("Search for %s\n", searchInput);
-    // scanf(" %s", searchInput); // For simplicity, assuming SID can be input as a string
+    char searchQuery[50];
+    printf("Enter student name or SID to search: ");
+    scanf("%s", searchQuery); // For simplicity, assuming no spaces in names or SIDs
+    printf("Searching for \'%s\'...\n", searchQuery);
 
     int found = 0;
     for (int i = 0; i < numSRecords; i++) {
-        if ((strstr(srecords[i].student.name, searchInput) != NULL) || (strcmp(searchInput, srecords[i].student.sid) == 0)) {
-            // Assuming printSRecord is a function that prints a single student record
-            printSRecord(srecords[i]);
+        if (strcmp(srecords[i].student.name, searchQuery) == 0 || strcmp(srecords[i].student.sid, searchQuery) == 0) {
+            if (!found) {
+                printf("%-15s %-12s %8s    %-10s %5s %5s %5s %5s %5s %5s\n", "Name", "Department", "Grade", "SID", "HW", "Quiz", "Midterm", "Final", "Other", "Total");
+                printf("-----------------------------------------------------------------------------\n");
+            }
+            printSRecord(srecords[i]); // Assuming you have a function to print a single record
             found = 1;
-            break;
+            break; // Assuming you want to stop after finding the first record
         }
     }
 
     if (!found) {
-        printf("No record found for %s.\n", searchInput);
+        printf("No records found for '%s'.\n", searchQuery);
     }
 }
-
-void displayMenu() {
-    printf("\nMenu:\n");
-    printf("1. Read student records from CSV\n");
-    printf("2. Print student records\n");
-    printf("3. Sort by total and print student records\n");
-    printf("4. Search for a student record by name or SID\n");
-    printf("5. Exit\n");
-    printf("Enter your choice: ");
-}
-
 
 int main() {
     SRecord srecords[MAX_STUDENT];
@@ -54,35 +67,36 @@ int main() {
 
         switch (choice) {
             case 1:
+                // Read and display student records
                 numSRecords = readSRecordsFromCSV("records.csv", srecords, MAX_STUDENT);
-                printf("%d records read.\n", numSRecords);
+                printSRecords(srecords, numSRecords);
                 break;
             case 2:
+                // Sort records by total and display
                 if (numSRecords > 0) {
+                    sortSRecords(srecords, numSRecords, "total");
+                    printf("\n\nAfter sorting by total:\n");
                     printSRecords(srecords, numSRecords);
                 } else {
-                    printf("No records to display. Please read records first.\n");
+                    printf("No records to sort. Please read the records first.\n");
                 }
                 break;
             case 3:
+                // Search student records by name or SID
                 if (numSRecords > 0) {
-                    sortSRecords(srecords, numSRecords, "total");
-                    printf("\nAfter sorting by total:\n");
-                    printSRecords(srecords, numSRecords);
+                    searchSRecords(srecords, numSRecords);
                 } else {
-                    printf("No records to sort. Please read records first.\n");
+                    printf("No records to search. Please read the records first.\n");
                 }
                 break;
             case 4:
-                searchSRecords(srecords, numSRecords);
-                break;
-            case 5:
+                // Exit
                 printf("Exiting program.\n");
                 break;
             default:
-                printf("Invalid choice. Please enter a number between 1 and 5.\n");
+                printf("Invalid choice. Please enter a valid option.\n");
         }
-    } while (choice != 5);
+    } while (choice != 4);
 
     return 0;
 }
